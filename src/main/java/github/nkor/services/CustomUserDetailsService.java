@@ -52,14 +52,10 @@ public class CustomUserDetailsService implements UserDetailsService {
                 return Collections.emptySet();
             }
 
-            // flat permissions
-            Set<Permission> permissions = roles.stream()
+            // flat permissions and map permissions to SimpleGrantedAuthority
+            return roles.stream()
                     .filter(r -> r.getPermissions() != null)
                     .flatMap(r -> r.getPermissions().stream())
-                    .collect(Collectors.toSet());
-
-            // map permissions to SimpleGrantedAuthority
-            return permissions.stream()
                     .map(p -> new SimpleGrantedAuthority(p.getName()))
                     .collect(Collectors.toSet());
         }
