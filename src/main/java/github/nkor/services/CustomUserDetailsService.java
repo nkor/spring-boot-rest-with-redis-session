@@ -40,7 +40,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     private static final class UserDetailsWithUserEntity implements UserDetails, Serializable {
         private User user;
 
-        public UserDetailsWithUserEntity(User user) {
+        UserDetailsWithUserEntity(User user) {
             this.user = user;
         }
 
