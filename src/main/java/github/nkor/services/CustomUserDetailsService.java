@@ -51,6 +51,7 @@ public class CustomUserDetailsService implements UserDetailsService {
             if (roles == null) {
                 return Collections.emptySet();
             }
+
             // flat permissions
             Set<Permission> permissions = roles.stream()
                     .filter(r -> r.getPermissions() != null)
