@@ -14,7 +14,6 @@ import org.springframework.session.web.http.HeaderHttpSessionIdResolver;
 import org.springframework.session.web.http.HttpSessionIdResolver;
 
 @Configuration
-@EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true) // enable @PreAuthorize and @PostAuthorize annotations
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
