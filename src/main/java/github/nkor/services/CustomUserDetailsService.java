@@ -1,9 +1,8 @@
 package github.nkor.services;
 
-import github.nkor.models.Permission;
 import github.nkor.models.Role;
 import github.nkor.models.User;
-import github.nkor.repository.UserRepository;
+import github.nkor.repositories.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

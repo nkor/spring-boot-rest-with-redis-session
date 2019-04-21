@@ -1,4 +1,4 @@
-package github.nkor.repository;
+package github.nkor.repositories;
 
 import github.nkor.models.User;
 import org.springframework.data.jpa.repository.Query;
