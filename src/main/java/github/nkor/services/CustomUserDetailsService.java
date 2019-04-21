@@ -56,7 +56,7 @@ public class CustomUserDetailsService implements UserDetailsService {
             Set<Role> roles = user.getRoles();
 
             if (roles == null) {
-                grantedAuthorities = Collections.emptySet();
+                grantedAuthorities = Collections.unmodifiableSet(Collections.emptySet());
             } else {
                 // flat permissions and map permissions to SimpleGrantedAuthority
                 grantedAuthorities = roles.stream()
@@ -64,6 +64,8 @@ public class CustomUserDetailsService implements UserDetailsService {
                         .flatMap(r -> r.getPermissions().stream())
                         .map(p -> new SimpleGrantedAuthority(p.getName()))
                         .collect(Collectors.toSet());
+
+                grantedAuthorities = Collections.unmodifiableCollection(grantedAuthorities);
             }
 
             return grantedAuthorities;
