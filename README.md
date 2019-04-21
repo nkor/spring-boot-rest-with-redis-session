@@ -43,3 +43,6 @@ OK, let's try to get protected resources. Sending requests to ProtectedResourceC
 - If we authenticated as ```admin@mail.com``` - all resources allowed
 - If we authenticated as ```nkor@mail.com``` - ```Access Denied``` for ```/protected/delete```
 - If we authenticated as ```anon@mail.com``` - ```Access Denied``` for ```/protected/write``` and ```/protected/delete```
+
+## 4. Invalidate session
+To invalidate one of active user sessions send ```POST``` request to ```/user/logout``` with ```X-Auth-Token``` header.
