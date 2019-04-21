@@ -1,4 +1,4 @@
-package github.nkor.model;
+package github.nkor.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
