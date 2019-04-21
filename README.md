@@ -31,7 +31,7 @@ After DB init we'll have the next following:
 
 
 ## 2. ProtectedResourceController
-We have only 1 REST controller ```ProtectedResourceController``` with the next following endpoints:
+We have REST controller for test permission-based authorization — ```ProtectedResourceController``` with the next following endpoints:
 1. ```/protected/read``` - requires ```READ``` permission
 2. ```/protected/write``` - requires ```WRITE``` permission
 3. ```/protected/delete``` - requires ```DELETE``` permission
