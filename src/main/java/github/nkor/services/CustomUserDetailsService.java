@@ -36,27 +36,37 @@ public class CustomUserDetailsService implements UserDetailsService {
         return new UserDetailsWithUserEntity(userWithPermissions);
     }
 
-    private static final class UserDetailsWithUserEntity implements UserDetails, Serializable {
+    public static final class UserDetailsWithUserEntity implements UserDetails, Serializable {
         private User user;
+        private Collection<? extends GrantedAuthority> grantedAuthorities;
 
-        UserDetailsWithUserEntity(User user) {
+        private UserDetailsWithUserEntity(User user) {
             this.user = user;
         }
 
         @Override
         public Collection<? extends GrantedAuthority> getAuthorities() {
+
+            // if grantedAuthorities is cached
+            // return it
+            if (grantedAuthorities != null) {
+                return grantedAuthorities;
+            }
+
             Set<Role> roles = user.getRoles();
 
             if (roles == null) {
-                return Collections.emptySet();
+                grantedAuthorities = Collections.emptySet();
+            } else {
+                // flat permissions and map permissions to SimpleGrantedAuthority
+                grantedAuthorities = roles.stream()
+                        .filter(r -> r.getPermissions() != null)
+                        .flatMap(r -> r.getPermissions().stream())
+                        .map(p -> new SimpleGrantedAuthority(p.getName()))
+                        .collect(Collectors.toSet());
             }
 
-            // flat permissions and map permissions to SimpleGrantedAuthority
-            return roles.stream()
-                    .filter(r -> r.getPermissions() != null)
-                    .flatMap(r -> r.getPermissions().stream())
-                    .map(p -> new SimpleGrantedAuthority(p.getName()))
-                    .collect(Collectors.toSet());
+            return grantedAuthorities;
         }
 
         @Override
